@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Third</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="output" class="d-flex flex-wrap gap-3">
+    </div>
+
+    <script>
+
+        fetch('https://dummyjson.com/carts')
+            .then((res) => {
+                return res.json()
+            })
+            .then((result) => {
+
+                let output = document.getElementById('output')
+
+                result.carts.map((eachProduct) => {
+
+                    eachProduct.products.map((product) => {
+
+                        output.innerHTML += `
+
+                        <div class="card" style="width: 18rem;">
+
+                            <img src="${product.thumbnail}" 
+                                 class="card-img-top">
+
+                            <div class="card-body">
+
+                                <h5 class="card-title">
+                                    ${product.title}
+                                </h5>
+
+                                <p class="card-text">
+                                     ${product.price}
+                                </p>
+
+                                <p class="card-text">
+                                    Quantity: ${product.quantity}
+                                </p>
+
+                                <p class="card-text">
+                                    ${product.total}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        `
+                    })
+
+                })
+
+                console.log(result)
+
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
+    </script>
+
+</body>
+
+</html>
